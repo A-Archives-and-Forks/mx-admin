@@ -84,9 +84,7 @@ export const SplitPanelLayout = defineComponent({
         max={props.max}
         class="h-full"
       >
-        <div class="h-full overflow-hidden border-r border-neutral-200 dark:border-neutral-800">
-          {slots.list?.()}
-        </div>
+        <div class="h-full overflow-hidden">{slots.list?.()}</div>
         <div class="h-full min-w-0 flex-1 overflow-hidden">
           {props.showPanel ? slots.panel?.() : slots.empty?.()}
         </div>

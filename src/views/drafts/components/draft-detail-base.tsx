@@ -600,7 +600,7 @@ export const DraftDetailBase = defineComponent({
               resizeTriggerClass="z-[10]"
               class="h-full"
             >
-              <div class="flex h-full flex-col border-r border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+              <div class="flex h-full flex-col bg-white dark:bg-neutral-900">
                 {renderVersionList()}
               </div>
               <div class="flex h-full flex-col bg-neutral-50 dark:bg-neutral-950">

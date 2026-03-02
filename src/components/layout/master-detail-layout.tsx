@@ -74,12 +74,7 @@ export const MasterDetailLayout = defineComponent({
           max={props.max}
           class="h-full"
         >
-          <div
-            class={[
-              'h-full overflow-hidden border-r border-neutral-200 dark:border-neutral-800',
-              props.listBgClass,
-            ]}
-          >
+          <div class={['h-full overflow-hidden', props.listBgClass]}>
             {slots.list?.()}
           </div>
           <div

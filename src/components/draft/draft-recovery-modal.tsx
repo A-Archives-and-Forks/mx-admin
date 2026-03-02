@@ -472,7 +472,7 @@ export const DraftRecoveryModal = defineComponent({
                 max={0.4}
                 class="h-full"
               >
-                <div class="flex h-full flex-col border-r border-neutral-200 dark:border-neutral-800">
+                <div class="flex h-full flex-col">
                   {/* Version list header */}
                   <div class="flex items-center gap-2 border-b border-neutral-200 px-4 py-2.5 dark:border-neutral-800">
                     <GitCompare class="size-4 text-neutral-500" />

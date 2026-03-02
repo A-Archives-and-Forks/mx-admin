@@ -74,7 +74,18 @@ export const SplitPanel = defineComponent({
           onDragEnd={props.onDragEnd}
         >
           {{
-            1: () => renderPanel(panels[0]),
+            1: () => (
+              <div
+                class={[
+                  'h-full overflow-hidden',
+                  props.direction === 'vertical'
+                    ? 'border-b border-neutral-200 dark:border-neutral-800'
+                    : 'border-r border-neutral-200 dark:border-neutral-800',
+                ]}
+              >
+                {renderPanel(panels[0])}
+              </div>
+            ),
             2: () => renderPanel(panels[1]),
             'resize-trigger': () => (
               <SplitResizeTrigger triggerClass={props.resizeTriggerClass} />
