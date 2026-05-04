@@ -112,7 +112,7 @@ const useNoteTopic = () => {
 
   const fetchTopic = async () => {
     const { data } = await topicsApi.getList({ size: 50 })
-    topics.value = data
+    topics.value = data as unknown as TopicModel[]
   }
 
   return { topics, fetchTopic }
@@ -154,7 +154,6 @@ const NoteWriteView = defineComponent(() => {
     weather: '',
     location: '',
     coordinates: null,
-    allowComment: true,
     isPublished: true,
     id: undefined,
     nid: undefined,
@@ -171,6 +170,12 @@ const NoteWriteView = defineComponent(() => {
   const data = reactive<NoteReactiveType>(resetReactive())
   const lexicalEditor = shallowRef<LexicalEditor | null>(null)
   const nid = ref<number>()
+  // Server stopped returning the raw `password` value after the PG migration —
+  // it now only emits `hasPassword: boolean`. Without this flag, editing an
+  // existing protected note would silently re-PATCH `password: null` and
+  // strip protection, since `data.password` defaults to null on load.
+  const hasExistingPassword = ref(false)
+  const passwordTouched = ref(false)
 
   const applyDraft = (
     draft: DraftModel,
@@ -213,12 +218,22 @@ const NoteWriteView = defineComponent(() => {
     }
     nid.value = noteData.nid
 
-    const created = new Date((noteData as any).created)
-    defaultTitle.value = `记录 ${created.getFullYear()} 年第 ${getDayOfYear(created)} 天`
+    const createdAt = new Date((noteData as any).createdAt)
+    defaultTitle.value = `记录 ${createdAt.getFullYear()} 年第 ${getDayOfYear(createdAt)} 天`
 
     parsePayloadIntoReactiveData(noteData as NoteModel)
+    // The reactive form keeps `created` as the canonical timestamp slot
+    // shared with WriteBaseType, but the API now returns the timestamp
+    // under `createdAt` after the Postgres migration.
+    data.created = (noteData as any).createdAt
     data.contentFormat = (noteData as any).contentFormat || 'markdown'
     data.content = (noteData as any).content || ''
+    hasExistingPassword.value = !!(noteData as any).hasPassword
+    passwordTouched.value = false
+    // Surface a placeholder so `enablePassword` reflects the server state and
+    // the toggle starts in the correct position. Empty string means "password
+    // is set, but I haven't typed a new one" — submit treats this as no-op.
+    data.password = hasExistingPassword.value ? '' : null
   }
 
   const {
@@ -300,12 +315,11 @@ const NoteWriteView = defineComponent(() => {
     }
 
     const parseDataToPayload = () => {
-      return {
-        ...toRaw(data),
+      const raw = toRaw(data)
+      const payload: Record<string, unknown> = {
+        ...raw,
         title: data.title?.trim() || defaultTitle.value,
         slug: data.slug.trim() || undefined,
-        password:
-          data.password && data.password.length > 0 ? data.password : null,
         publicAt: data.publicAt
           ? (() => {
               const date = new Date(data.publicAt)
@@ -315,6 +329,20 @@ const NoteWriteView = defineComponent(() => {
         contentFormat: data.contentFormat,
         content: data.contentFormat === 'lexical' ? data.content : undefined,
       }
+      // Password handling — preserve the server-side value when the user
+      // didn't touch the field. The server doesn't echo the raw password
+      // back, so we don't have it to round-trip; sending `null` would
+      // clear protection.
+      const passwordIsSet =
+        typeof data.password === 'string' && data.password.length > 0
+      if (hasExistingPassword.value && !passwordTouched.value) {
+        delete payload.password
+      } else if (passwordIsSet) {
+        payload.password = data.password
+      } else {
+        payload.password = null
+      }
+      return payload
     }
 
     const draftId = serverDraft.draftId.value
@@ -606,6 +634,7 @@ const NoteWriteView = defineComponent(() => {
           description="启用后需要输入密码才能查看"
           modelValue={enablePassword.value}
           onUpdate={(e) => {
+            passwordTouched.value = true
             if (e) {
               data.password = ''
             } else {
@@ -616,9 +645,20 @@ const NoteWriteView = defineComponent(() => {
 
         {enablePassword.value && (
           <div class="mb-4 ml-4 border-l-2 border-neutral-200 pl-4 dark:border-neutral-700">
-            <FormField label="输入密码">
+            <FormField
+              label="输入密码"
+              description={
+                hasExistingPassword.value && !passwordTouched.value
+                  ? '此手记已设密码；留空保留原值，输入新值则覆盖'
+                  : undefined
+              }
+            >
               <NInput
-                placeholder="设置访问密码"
+                placeholder={
+                  hasExistingPassword.value && !passwordTouched.value
+                    ? '保留原密码'
+                    : '设置访问密码'
+                }
                 type="password"
                 value={data.password}
                 inputProps={{
@@ -626,7 +666,10 @@ const NoteWriteView = defineComponent(() => {
                   autocapitalize: 'off',
                   autocomplete: 'new-password',
                 }}
-                onInput={(e) => void (data.password = e)}
+                onInput={(e) => {
+                  passwordTouched.value = true
+                  data.password = e
+                }}
               />
             </FormField>
           </div>
