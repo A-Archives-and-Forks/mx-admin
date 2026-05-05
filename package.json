@@ -6,6 +6,10 @@
     "before": [
       "git pull --rebase"
     ],
+    "files": [
+      "package.json",
+      "apps/admin/package.json"
+    ],
     "changelog": true
   },
   "scripts": {
