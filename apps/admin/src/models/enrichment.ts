@@ -34,6 +34,12 @@ export interface EnrichmentRow {
   provider: string
   externalId: string
   url: string
+  /**
+   * Cache locale tag. `''` denotes the default / locale-unaware row used by
+   * single-language providers and as the fallback row of locale-aware ones.
+   * Non-empty values are normalized 2-letter codes (`zh`, `ja`, `ko`, `en`).
+   */
+  locale: string
   normalized: EnrichmentResult
   raw: unknown | null
   fetchedAt: string
@@ -60,4 +66,8 @@ export interface EnrichmentProviderMeta {
   missingKeys: string[]
   requiredConfigKeys?: string[]
   featureGateConfigKey?: string
+  /** Whether this provider fetches per-locale variants (e.g. TMDB). */
+  localeAware: boolean
+  /** ISO-639-1 codes the provider can localize into (only when localeAware). */
+  supportedLocales?: readonly string[]
 }

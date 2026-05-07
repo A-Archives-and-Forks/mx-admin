@@ -67,10 +67,12 @@ export default defineComponent({
       mutationFn: ({
         provider,
         externalId,
+        locale,
       }: {
         provider: string
         externalId: string
-      }) => enrichmentApi.refresh(provider, externalId),
+        locale: string
+      }) => enrichmentApi.refresh(provider, externalId, locale || undefined),
       onSuccess: () => {
         toast.success('已刷新')
         queryClient.invalidateQueries({ queryKey: queryKeys.enrichment.all })
@@ -149,6 +151,7 @@ export default defineComponent({
                       <th class="px-3 py-2 text-left font-medium">Provider</th>
                       <th class="px-3 py-2 text-left font-medium">标题</th>
                       <th class="px-3 py-2 text-left font-medium">外部 ID</th>
+                      <th class="px-3 py-2 text-left font-medium">语言</th>
                       <th class="px-3 py-2 text-left font-medium">抓取于</th>
                       <th class="px-3 py-2 text-left font-medium">失败</th>
                       <th class="px-3 py-2 text-right font-medium">操作</th>
@@ -164,12 +167,14 @@ export default defineComponent({
                           refreshMutation.variables.value?.provider ===
                             row.provider &&
                           refreshMutation.variables.value?.externalId ===
-                            row.externalId
+                            row.externalId &&
+                          refreshMutation.variables.value?.locale === row.locale
                         }
                         onRefresh={() =>
                           refreshMutation.mutate({
                             provider: row.provider,
                             externalId: row.externalId,
+                            locale: row.locale,
                           })
                         }
                         onInvalidate={() =>
@@ -400,9 +405,16 @@ const ProviderChip = defineComponent({
     return () => {
       const sc = stateConfig.value
       const tooltipLines = [
-        ...props.providers.map((p) => `· ${p.displayName}`),
+        ...props.providers.map((p) => {
+          const localeNote =
+            p.localeAware && p.supportedLocales?.length
+              ? ` (i18n: ${p.supportedLocales.join('/')})`
+              : ''
+          return `· ${p.displayName}${localeNote}`
+        }),
         ...(props.missingHint ? ['', props.missingHint] : []),
       ]
+      const hasI18n = props.providers.some((p) => p.localeAware === true)
       const chip = (
         <button
           type="button"
@@ -417,6 +429,14 @@ const ProviderChip = defineComponent({
         >
           <sc.Icon class="size-3" aria-hidden="true" />
           <span class="font-medium">{props.label}</span>
+          {hasI18n && (
+            <span
+              class="text-[10px] text-neutral-500 dark:text-neutral-400"
+              title="支持多语言"
+            >
+              i18n
+            </span>
+          )}
           {props.missingHint && (
             <span class="text-yellow-600 dark:text-yellow-500">⚠</span>
           )}
@@ -501,6 +521,15 @@ const EnrichmentRowItem = defineComponent({
             <code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-xs dark:bg-neutral-800">
               {row.externalId}
             </code>
+          </td>
+          <td class="px-3 py-2 align-top">
+            {row.locale ? (
+              <NTag size="small" type="default">
+                {row.locale}
+              </NTag>
+            ) : (
+              <span class="text-xs text-neutral-400">默认</span>
+            )}
           </td>
           <td class="px-3 py-2 align-top text-xs text-neutral-500">
             <RelativeTime time={new Date(row.fetchedAt)} />
