@@ -1,9 +1,23 @@
 # CHANGELOG
 
 
+## 7.1.0 (2026-05-07)
+
+* release: v7.1.0 ([4a00487](https://github.com/mx-space/mx-admin/commit/4a00487))
+* feat: add specs for charts, views migration, and table effort ([af0df1c](https://github.com/mx-space/mx-admin/commit/af0df1c))
+* feat(enrichment): admin enrichment view + readiness-driven status bar ([46c69e2](https://github.com/mx-space/mx-admin/commit/46c69e2))
+* chore: round favicon corners ([70b6c55](https://github.com/mx-space/mx-admin/commit/70b6c55))
+* chore: sync apps/admin to 7.0.1 and use recursive bump ([1e02a95](https://github.com/mx-space/mx-admin/commit/1e02a95))
+
+## <small>7.0.1 (2026-05-05)</small>
+
+* release: v7.0.1 ([224c6d6](https://github.com/mx-space/mx-admin/commit/224c6d6))
+* fix(release): sync apps/admin version on bump and CI ([bfec41d](https://github.com/mx-space/mx-admin/commit/bfec41d))
+* chore: refresh brand logo ([1c1b771](https://github.com/mx-space/mx-admin/commit/1c1b771))
+
 ## 7.0.0 (2026-05-04)
 
-* release: v7.0.0 ([f494c59](https://github.com/mx-space/mx-admin/commit/f494c59))
+* release: v7.0.0 ([a7646f4](https://github.com/mx-space/mx-admin/commit/a7646f4))
 * refactor: align types and API with mx-core v11 (#1036) ([f3362a3](https://github.com/mx-space/mx-admin/commit/f3362a3)), closes [#1036](https://github.com/mx-space/mx-admin/issues/1036)
 
 ## <small>6.8.1 (2026-05-01)</small>
