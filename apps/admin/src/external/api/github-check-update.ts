@@ -1,4 +1,3 @@
-import PKG from '../../../package.json'
 import { octokit } from './octokit'
 
 export const checkUpdateFromGitHub = async () => {
@@ -9,7 +8,7 @@ export const checkUpdateFromGitHub = async () => {
 
   const { data: dashboard } = await octokit.rest.repos.getLatestRelease({
     owner: 'mx-space',
-    repo: PKG.name,
+    repo: 'mx-admin',
   })
 
   return {
