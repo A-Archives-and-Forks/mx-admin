@@ -33,6 +33,7 @@ import type {
 import type { PropType, Ref } from 'vue'
 import type { MetaFieldsSchema } from './agent-chat/composables/use-meta-tools'
 
+import { enrichmentApi } from '~/api/enrichment'
 import { filesApi } from '~/api/files'
 import { API_URL } from '~/constants/env'
 import { useUIStore } from '~/stores/ui'
@@ -46,6 +47,9 @@ import {
   buildMetaTools,
 } from './agent-chat/composables/use-meta-tools'
 import { useSessionManager } from './agent-chat/composables/use-session-manager'
+
+const fetchEnrichment = (url: string) =>
+  enrichmentApi.resolve(url).catch(() => null)
 
 async function saveExcalidrawSnapshot(
   snapshot: object,
@@ -174,6 +178,7 @@ export const RichEditorWithAgent = defineComponent({
       systemMessages: metaSystemMessages.value,
       saveExcalidrawSnapshot,
       apiUrl: API_URL,
+      fetchEnrichment,
       onChange: (v: SerializedEditorState) => emit('change', v),
       onSubmit: () => emit('submit'),
       onEditorReady: (editor: LexicalEditor | null) => {

@@ -1,8 +1,13 @@
 export type {
   AgentLoopHandle,
+  EnrichmentAttribute,
+  EnrichmentImage,
+  EnrichmentResult,
   ImageUpload,
   SaveExcalidrawSnapshot,
 } from './types'
+
+export type { EnrichmentFetcher } from './components/EnrichmentLinkCardContext'
 
 export { NestedDocDialogEditor } from './components/NestedDocDialogEditor'
 export {

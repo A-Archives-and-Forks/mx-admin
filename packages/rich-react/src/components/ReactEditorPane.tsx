@@ -8,6 +8,7 @@ import type { ShiroEditorProps } from '@haklex/rich-kit-shiro'
 import type { LexicalEditor } from 'lexical'
 import type { RefObject } from 'react'
 import type { AgentLoopHandle, SaveExcalidrawSnapshot } from '../types'
+import type { EnrichmentFetcher } from './EnrichmentLinkCardContext'
 
 import { DialogStackProvider } from '@haklex/rich-editor-ui'
 import {
@@ -23,6 +24,10 @@ import {
 import { ExcalidrawConfigProvider, ShiroEditor } from '@haklex/rich-kit-shiro'
 import { ToolbarPlugin } from '@haklex/rich-plugin-toolbar'
 
+import { EnrichmentFetcherProvider } from './EnrichmentLinkCardContext'
+
+import './setup-enrichment-linkcard'
+
 import { AgentLoopCapture } from './AgentLoopCapture'
 import { NestedDocDialogEditor } from './NestedDocDialogEditor'
 
@@ -32,6 +37,7 @@ export interface ReactEditorPaneProps {
   provider: LLMProvider | null
   saveExcalidrawSnapshot: SaveExcalidrawSnapshot
   apiUrl: string
+  fetchEnrichment?: EnrichmentFetcher | null
   onChange?: ShiroEditorProps['onChange']
   onSubmit?: ShiroEditorProps['onSubmit']
   onEditorReady?: (editor: LexicalEditor | null) => void
@@ -46,6 +52,7 @@ export function ReactEditorPane({
   provider,
   saveExcalidrawSnapshot,
   apiUrl,
+  fetchEnrichment,
   onChange,
   onSubmit,
   onEditorReady,
@@ -63,38 +70,42 @@ export function ReactEditorPane({
   }
 
   return (
-    <NestedDocDialogEditorProvider value={NestedDocDialogEditor}>
-      <DialogStackProvider>
-        <ExcalidrawConfigProvider
-          saveSnapshot={saveExcalidrawSnapshot}
-          apiUrl={apiUrl}
-        >
-          <ShiroEditor
-            {...editorProps}
-            extraNodes={[
-              ...(editorProps.extraNodes || []),
-              ...nestedDocEditNodes,
-            ]}
-            header={<ToolbarPlugin />}
-            floatingToolbarActions={provider ? <AgentAskAIAction /> : undefined}
-            onChange={onChange}
-            onSubmit={onSubmit}
-            onEditorReady={handleEditorReady}
+    <EnrichmentFetcherProvider value={fetchEnrichment ?? null}>
+      <NestedDocDialogEditorProvider value={NestedDocDialogEditor}>
+        <DialogStackProvider>
+          <ExcalidrawConfigProvider
+            saveSnapshot={saveExcalidrawSnapshot}
+            apiUrl={apiUrl}
           >
-            <DiffReviewOverlayPlugin store={store} />
-            {provider ? <AgentSelectionPinPlugin store={store} /> : null}
-            <AgentLoopCapture
-              editorRef={editorRef}
-              onAgentLoopReady={onAgentLoopReady}
-              provider={provider}
-              store={store}
-              tools={tools}
-              systemMessages={systemMessages}
-            />
-            <NestedDocPlugin />
-          </ShiroEditor>
-        </ExcalidrawConfigProvider>
-      </DialogStackProvider>
-    </NestedDocDialogEditorProvider>
+            <ShiroEditor
+              {...editorProps}
+              extraNodes={[
+                ...(editorProps.extraNodes || []),
+                ...nestedDocEditNodes,
+              ]}
+              header={<ToolbarPlugin />}
+              floatingToolbarActions={
+                provider ? <AgentAskAIAction /> : undefined
+              }
+              onChange={onChange}
+              onSubmit={onSubmit}
+              onEditorReady={handleEditorReady}
+            >
+              <DiffReviewOverlayPlugin store={store} />
+              {provider ? <AgentSelectionPinPlugin store={store} /> : null}
+              <AgentLoopCapture
+                editorRef={editorRef}
+                onAgentLoopReady={onAgentLoopReady}
+                provider={provider}
+                store={store}
+                tools={tools}
+                systemMessages={systemMessages}
+              />
+              <NestedDocPlugin />
+            </ShiroEditor>
+          </ExcalidrawConfigProvider>
+        </DialogStackProvider>
+      </NestedDocDialogEditorProvider>
+    </EnrichmentFetcherProvider>
   )
 }

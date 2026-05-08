@@ -14,6 +14,7 @@ import '@haklex/rich-kit-shiro/style.css'
 import '@haklex/rich-plugin-toolbar/style.css'
 import '@haklex/rich-ext-nested-doc/style.css'
 
+import type { EnrichmentFetcher } from '../components/EnrichmentLinkCardContext'
 import type { AgentLoopHandle, SaveExcalidrawSnapshot } from '../types'
 import type { BuildShiroEditorPropsInput } from '../utils/build-shiro-editor-props'
 
@@ -28,6 +29,7 @@ export interface MountRichEditorWithAgentOptions extends BuildShiroEditorPropsIn
   systemMessages?: ChatMessage[]
   saveExcalidrawSnapshot: SaveExcalidrawSnapshot
   apiUrl: string
+  fetchEnrichment?: EnrichmentFetcher | null
   onChange?: (value: SerializedEditorState) => void
   onSubmit?: () => void
   onEditorReady?: (editor: LexicalEditor | null) => void
@@ -89,6 +91,7 @@ export function mountRichEditorWithAgent(
         provider={opts.provider}
         saveExcalidrawSnapshot={opts.saveExcalidrawSnapshot}
         apiUrl={opts.apiUrl}
+        fetchEnrichment={opts.fetchEnrichment}
         onChange={handleChange}
         onSubmit={handleSubmit}
         onEditorReady={handleEditorReady}

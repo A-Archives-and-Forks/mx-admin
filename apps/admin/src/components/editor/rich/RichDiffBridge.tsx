@@ -4,7 +4,11 @@ import type { RichDiffHandle } from '@mx-admin/rich-react'
 import type { SerializedEditorState } from 'lexical'
 import type { PropType } from 'vue'
 
+import { enrichmentApi } from '~/api/enrichment'
 import { useUIStore } from '~/stores/ui'
+
+const fetchEnrichment = (url: string) =>
+  enrichmentApi.resolve(url).catch(() => null)
 
 export const RichDiffBridge = defineComponent({
   props: {
@@ -34,6 +38,7 @@ export const RichDiffBridge = defineComponent({
         variant: props.variant,
         className: props.className,
         theme: resolveTheme(),
+        fetchEnrichment,
       })
 
       watch(
@@ -51,6 +56,7 @@ export const RichDiffBridge = defineComponent({
             variant: props.variant,
             className: props.className,
             theme: resolveTheme(),
+            fetchEnrichment,
           }),
       )
     })

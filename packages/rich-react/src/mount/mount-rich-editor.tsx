@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import type { LexicalEditor, SerializedEditorState } from 'lexical'
+import type { EnrichmentFetcher } from '../components/EnrichmentLinkCardContext'
 import type { SaveExcalidrawSnapshot } from '../types'
 import type { BuildShiroEditorPropsInput } from '../utils/build-shiro-editor-props'
 
@@ -13,6 +14,7 @@ export interface MountRichEditorOptions extends BuildShiroEditorPropsInput {
   theme: 'dark' | 'light'
   saveExcalidrawSnapshot: SaveExcalidrawSnapshot
   apiUrl: string
+  fetchEnrichment?: EnrichmentFetcher | null
   onChange?: (value: SerializedEditorState) => void
   onSubmit?: () => void
   onEditorReady?: (editor: LexicalEditor | null) => void
@@ -66,6 +68,7 @@ export function mountRichEditor(
         editorProps={editorProps}
         saveExcalidrawSnapshot={opts.saveExcalidrawSnapshot}
         apiUrl={opts.apiUrl}
+        fetchEnrichment={opts.fetchEnrichment}
         onChange={handleChange}
         onSubmit={handleSubmit}
         onEditorReady={handleEditorReady}

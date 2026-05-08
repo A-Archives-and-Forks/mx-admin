@@ -13,6 +13,12 @@ import {
 
 import '@haklex/rich-diff/style.css'
 
+import type { EnrichmentFetcher } from '../components/EnrichmentLinkCardContext'
+
+import { EnrichmentFetcherProvider } from '../components/EnrichmentLinkCardContext'
+
+import '../components/setup-enrichment-linkcard'
+
 const extraNodes = [
   ExcalidrawNode,
   ...embedNodes,
@@ -27,6 +33,7 @@ export interface MountRichDiffOptions {
   variant?: 'article' | 'comment' | 'note'
   className?: string
   theme: 'dark' | 'light'
+  fetchEnrichment?: EnrichmentFetcher | null
 }
 
 export interface RichDiffHandle {
@@ -42,15 +49,17 @@ export function mountRichDiff(
 
   const render = (opts: MountRichDiffOptions) => {
     root.render(
-      <RichDiff
-        oldValue={opts.oldValue}
-        newValue={opts.newValue}
-        variant={opts.variant}
-        theme={opts.theme}
-        className={opts.className}
-        extraNodes={extraNodes}
-        rendererConfig={enhancedRendererConfig}
-      />,
+      <EnrichmentFetcherProvider value={opts.fetchEnrichment ?? null}>
+        <RichDiff
+          oldValue={opts.oldValue}
+          newValue={opts.newValue}
+          variant={opts.variant}
+          theme={opts.theme}
+          className={opts.className}
+          extraNodes={extraNodes}
+          rendererConfig={enhancedRendererConfig}
+        />
+      </EnrichmentFetcherProvider>,
     )
   }
 
