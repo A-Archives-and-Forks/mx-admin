@@ -1,9 +1,14 @@
 # CHANGELOG
 
 
+## <small>7.1.3 (2026-05-09)</small>
+
+* release: v7.1.3 ([eb2808a](https://github.com/mx-space/mx-admin/commit/eb2808a))
+* fix: use literal 'mx-admin' for dashboard release lookup ([561d18a](https://github.com/mx-space/mx-admin/commit/561d18a))
+
 ## <small>7.1.2 (2026-05-08)</small>
 
-* release: v7.1.2 ([09949a7](https://github.com/mx-space/mx-admin/commit/09949a7))
+* release: v7.1.2 ([b6455d9](https://github.com/mx-space/mx-admin/commit/b6455d9))
 * feat: enrichment support ([8c9bb61](https://github.com/mx-space/mx-admin/commit/8c9bb61))
 * chore(deps): bump @haklex/* to 0.4.1 ([df02505](https://github.com/mx-space/mx-admin/commit/df02505))
 
