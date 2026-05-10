@@ -22,7 +22,7 @@ export interface AIWriterGenerateResponse {
 // AI Summary 类型
 export interface AISummary {
   id: string
-  created: string
+  createdAt: string
   summary: string
   hash: string
   refId: string
@@ -68,8 +68,7 @@ export interface SummaryByRefResponse {
 // AI Insights 类型
 export interface AIInsights {
   id: string
-  created: string
-  updated?: string
+  createdAt: string
   refId: string
   lang: string
   hash: string
@@ -107,7 +106,7 @@ export interface InsightsByRefResponse {
 // AI Translation 类型
 export interface AITranslation {
   id: string
-  created: string
+  createdAt: string
   hash: string
   refId: string
   refType: string

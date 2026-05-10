@@ -24,6 +24,19 @@ import { SplitPanelEmptyState, SplitPanelLayout } from '~/components/layout'
 
 type ArticleRefType = ArticleInfo['type']
 
+const safeFormat = (value: unknown, pattern: string, fallback = '-') => {
+  if (value === null || value === undefined || value === '') {
+    console.warn('[safeFormat] empty value', value)
+    return fallback
+  }
+  const d = new Date(value as string | number | Date)
+  if (Number.isNaN(d.getTime())) {
+    console.warn('[safeFormat] invalid date', { value, type: typeof value })
+    return fallback
+  }
+  return format(d, pattern)
+}
+
 const RefTypeIcons: Record<ArticleRefType, typeof FileTextIcon> = {
   Post: FileTextIcon,
   Note: StickyNoteIcon,
@@ -348,7 +361,7 @@ const SummaryListItem = defineComponent({
             </span>
             <span class="flex items-center gap-1 text-xs text-neutral-400">
               <CalendarIcon class="size-3" />
-              {format(new Date(props.item.created), 'MM-dd HH:mm')}
+              {safeFormat(props.item.createdAt, 'MM-dd HH:mm')}
             </span>
           </div>
 
@@ -496,10 +509,7 @@ const SummaryEditPanel = defineComponent({
                 <div class="flex items-center gap-2">
                   <span class="text-neutral-500">创建时间</span>
                   <span class="text-neutral-700 dark:text-neutral-300">
-                    {format(
-                      new Date(props.summary.created),
-                      'yyyy-MM-dd HH:mm:ss',
-                    )}
+                    {safeFormat(props.summary.createdAt, 'yyyy-MM-dd HH:mm:ss')}
                   </span>
                 </div>
                 <div class="flex items-center gap-2">

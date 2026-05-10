@@ -199,7 +199,7 @@ const LogItem = defineComponent({
 
           {/* Time */}
           <span class="shrink-0 text-xs text-neutral-400 dark:text-neutral-500">
-            <RelativeTime time={props.log.created} />
+            <RelativeTime time={props.log.createdAt} />
           </span>
         </button>
 

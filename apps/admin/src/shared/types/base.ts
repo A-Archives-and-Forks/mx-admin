@@ -10,8 +10,8 @@ export type WriteBaseType = {
 
   id?: string
   images: Image[]
-  created?: string
-  modified?: string
+  createdAt?: string
+  modifiedAt?: string
 
   meta?: any
 }

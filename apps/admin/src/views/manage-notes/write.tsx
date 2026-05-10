@@ -119,10 +119,10 @@ const useNoteTopic = () => {
 }
 
 const buildNotePublicPath = (
-  note: Pick<NoteReactiveType, 'slug' | 'created'> & { nid?: number },
+  note: Pick<NoteReactiveType, 'slug' | 'createdAt'> & { nid?: number },
 ) => {
   if (note.slug) {
-    const date = note.created ? new Date(note.created) : new Date()
+    const date = note.createdAt ? new Date(note.createdAt) : new Date()
     return `/notes/${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}/${note.slug}`
   }
 
@@ -160,7 +160,7 @@ const NoteWriteView = defineComponent(() => {
     topicId: undefined,
     images: [],
     meta: undefined,
-    created: undefined,
+    createdAt: undefined,
     contentFormat: preferredContentFormat.value,
     content: '',
   })
@@ -222,10 +222,7 @@ const NoteWriteView = defineComponent(() => {
     defaultTitle.value = `记录 ${createdAt.getFullYear()} 年第 ${getDayOfYear(createdAt)} 天`
 
     parsePayloadIntoReactiveData(noteData as NoteModel)
-    // The reactive form keeps `created` as the canonical timestamp slot
-    // shared with WriteBaseType, but the API now returns the timestamp
-    // under `createdAt` after the Postgres migration.
-    data.created = (noteData as any).createdAt
+    data.createdAt = (noteData as any).createdAt
     data.contentFormat = (noteData as any).contentFormat || 'markdown'
     data.content = (noteData as any).content || ''
     hasExistingPassword.value = !!(noteData as any).hasPassword
@@ -525,7 +522,9 @@ const NoteWriteView = defineComponent(() => {
         >
           <SlugInput
             prefix={`${WEB_URL}/notes/${(() => {
-              const date = data.created ? new Date(data.created) : new Date()
+              const date = data.createdAt
+                ? new Date(data.createdAt)
+                : new Date()
               return `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}/`
             })()}`}
             value={data.slug}

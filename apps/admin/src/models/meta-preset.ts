@@ -56,8 +56,8 @@ export interface MetaPresetField {
   isBuiltin: boolean
   order: number
   enabled: boolean
-  created?: string
-  updated?: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 /**

@@ -539,7 +539,7 @@ const InsightsListItem = defineComponent({
             )}
             <span class="flex items-center gap-1 text-xs text-neutral-400">
               <CalendarIcon class="size-3" />
-              {format(new Date(props.item.created), 'MM-dd HH:mm')}
+              {format(new Date(props.item.createdAt), 'MM-dd HH:mm')}
             </span>
           </div>
 
@@ -800,22 +800,11 @@ const InsightsDetailEditor = defineComponent({
                   <span class="text-neutral-500">创建时间</span>
                   <span class="text-neutral-700 dark:text-neutral-300">
                     {format(
-                      new Date(props.insights.created),
+                      new Date(props.insights.createdAt),
                       'yyyy-MM-dd HH:mm:ss',
                     )}
                   </span>
                 </div>
-                {props.insights.updated && (
-                  <div class="flex items-center gap-2">
-                    <span class="text-neutral-500">更新时间</span>
-                    <span class="text-neutral-700 dark:text-neutral-300">
-                      {format(
-                        new Date(props.insights.updated),
-                        'yyyy-MM-dd HH:mm:ss',
-                      )}
-                    </span>
-                  </div>
-                )}
                 <div class="flex items-center gap-2">
                   <span class="text-neutral-500">语言</span>
                   <span class="text-neutral-700 dark:text-neutral-300">

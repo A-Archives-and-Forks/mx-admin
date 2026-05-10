@@ -111,13 +111,13 @@ export const TextBaseDrawer = defineComponent({
                   }}
                   type="datetime"
                   value={
-                    props.data.created
-                      ? new Date(props.data.created).getTime()
+                    props.data.createdAt
+                      ? new Date(props.data.createdAt).getTime()
                       : undefined
                   }
                   onUpdateValue={(e) => {
                     const value = e ? new Date(e).toISOString() : undefined
-                    props.data.created = value
+                    props.data.createdAt = value
                   }}
                 />
               </FormField>

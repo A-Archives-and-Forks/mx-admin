@@ -152,7 +152,7 @@ const PostWriteView = defineComponent(() => {
     pin: false,
     pinOrder: 1,
     relatedId: [],
-    created: undefined,
+    createdAt: undefined,
     isPublished: true,
     contentFormat: preferredContentFormat.value,
     content: '',

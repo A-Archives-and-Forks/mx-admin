@@ -504,7 +504,7 @@ const TranslationListItem = defineComponent({
         <div class="mt-1 flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400">
           <span class="flex items-center gap-1">
             <CalendarIcon class="size-3" />
-            {format(new Date(props.item.created), 'MM-dd HH:mm')}
+            {format(new Date(props.item.createdAt), 'MM-dd HH:mm')}
           </span>
           {props.item.aiModel && (
             <span class="flex items-center gap-1">
@@ -792,7 +792,7 @@ const TranslationEditPanel = defineComponent({
                   <span class="text-neutral-500">创建时间</span>
                   <span class="text-neutral-700 dark:text-neutral-300">
                     {format(
-                      new Date(props.translation.created),
+                      new Date(props.translation.createdAt),
                       'yyyy-MM-dd HH:mm:ss',
                     )}
                   </span>

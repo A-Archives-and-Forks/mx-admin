@@ -9,7 +9,7 @@ export interface ServerlessLogEntry {
   ip: string
   status: 'success' | 'error'
   executionTime: number
-  created: string
+  createdAt: string
   logs?: { level: string; timestamp: number; args: unknown[] }[]
   error?: { name: string; message: string; stack?: string }
 }

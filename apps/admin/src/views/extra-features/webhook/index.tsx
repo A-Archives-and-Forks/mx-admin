@@ -1,7 +1,6 @@
 import { cloneDeep } from 'es-toolkit/compat'
 import {
   ArrowLeft,
-  Calendar,
   ChevronRight,
   ExternalLink as ExternalLinkIcon,
   Globe,
@@ -470,24 +469,6 @@ const WebhookDetailPanel = defineComponent({
                 label="Secret"
                 value={props.webhook.secret ? '已配置' : '未配置'}
               />
-              {props.webhook.created && (
-                <InfoCard
-                  icon={<Calendar class="size-4" />}
-                  label="创建时间"
-                  value={new Date(props.webhook.created).toLocaleString(
-                    'zh-CN',
-                  )}
-                />
-              )}
-              {props.webhook.updated && (
-                <InfoCard
-                  icon={<RefreshIcon class="size-4" />}
-                  label="更新时间"
-                  value={new Date(props.webhook.updated).toLocaleString(
-                    'zh-CN',
-                  )}
-                />
-              )}
             </div>
 
             {/* Events */}
