@@ -1,18 +1,21 @@
 import { enhancedEditRendererConfig, enhancedRendererConfig } from '../shiro'
-import { EnrichmentLinkCard } from './EnrichmentLinkCard'
+import { LinkCardWithEnrichment } from './linkcard/LinkCardWithEnrichment'
 
-// Globally route the LinkCard slot through our enrichment-aware renderer.
-// `EnrichmentLinkCard` falls back to the library's default LinkCardRenderer
-// when no fetcher is wired up, so this is safe to apply at module load.
+// Route the LinkCard renderer slot through a wrapper that injects the
+// admin enrichment plugin (priority 1000, takes precedence over haklex built-ins)
+// whenever an `EnrichmentFetcher` is provided via context. When no fetcher is
+// present, the wrapper transparently delegates to the default
+// `LinkCardRenderer`, so built-in plugins (githubPrPlugin, tmdbPlugin, …)
+// continue to work.
 let patched = false
 
 export function patchLinkCardWithEnrichment(): void {
   if (patched) return
   patched = true
   ;(enhancedEditRendererConfig as { LinkCard?: unknown }).LinkCard =
-    EnrichmentLinkCard
+    LinkCardWithEnrichment
   ;(enhancedRendererConfig as { LinkCard?: unknown }).LinkCard =
-    EnrichmentLinkCard
+    LinkCardWithEnrichment
 }
 
 patchLinkCardWithEnrichment()
