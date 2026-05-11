@@ -1,13 +1,23 @@
 # CHANGELOG
 
 
+## <small>7.1.5 (2026-05-11)</small>
+
+* release: v7.1.5 ([4c12e17](https://github.com/mx-space/mx-admin/commit/4c12e17))
+* style(admin): rich editor content mt-4 and conditional toolbar chrome ([f2a2a67](https://github.com/mx-space/mx-admin/commit/f2a2a67))
+* chore(deps): bump @haklex/* to 0.8.0 ([6a1b03f](https://github.com/mx-space/mx-admin/commit/6a1b03f))
+* chore(rich-react): migrate to @haklex 0.7.0 with vendored Shiro ([47c6666](https://github.com/mx-space/mx-admin/commit/47c6666))
+
 ## <small>7.1.4 (2026-05-10)</small>
 
-* fix(admin): align field names with backend *At rename ([6f81a3f](https://github.com/mx-space/mx-admin/commit/6f81a3f))
+* release: v7.1.4 ([abcae3b](https://github.com/mx-space/mx-admin/commit/abcae3b))
+* fix(admin): align field names with backend *At rename ([6f81a3f](https://github.com/mx-space/mx-admin/commit/6f81a3f)), closes [mx-space/core#2659](https://github.com/mx-space/core/issues/2659)
+* fix(admin): 修正 Top10 前端跳转 (#1027) ([c38c198](https://github.com/mx-space/mx-admin/commit/c38c198)), closes [#1027](https://github.com/mx-space/mx-admin/issues/1027)
+* feat(search-index): admin rebuild card + validation page (#1040) ([9e942a3](https://github.com/mx-space/mx-admin/commit/9e942a3)), closes [#1040](https://github.com/mx-space/mx-admin/issues/1040)
 
 ## <small>7.1.3 (2026-05-09)</small>
 
-* release: v7.1.3 ([eb2808a](https://github.com/mx-space/mx-admin/commit/eb2808a))
+* release: v7.1.3 ([c9032a2](https://github.com/mx-space/mx-admin/commit/c9032a2))
 * fix: use literal 'mx-admin' for dashboard release lookup ([561d18a](https://github.com/mx-space/mx-admin/commit/561d18a))
 
 ## <small>7.1.2 (2026-05-08)</small>
