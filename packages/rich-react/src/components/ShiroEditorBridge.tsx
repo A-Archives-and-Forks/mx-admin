@@ -1,17 +1,18 @@
-import type { ShiroEditorProps } from '@haklex/rich-kit-shiro'
 import type { LexicalEditor } from 'lexical'
 import type { ReactNode } from 'react'
+import type { ShiroEditorProps } from '../shiro'
 import type { SaveExcalidrawSnapshot } from '../types'
 import type { EnrichmentFetcher } from './EnrichmentLinkCardContext'
 
 import { DialogStackProvider } from '@haklex/rich-editor-ui'
+import { ExcalidrawConfigProvider } from '@haklex/rich-ext-excalidraw'
 import {
   NestedDocDialogEditorProvider,
   nestedDocEditNodes,
 } from '@haklex/rich-ext-nested-doc'
-import { ExcalidrawConfigProvider, ShiroEditor } from '@haklex/rich-kit-shiro'
 import { ToolbarPlugin } from '@haklex/rich-plugin-toolbar'
 
+import { ShiroEditor } from '../shiro'
 import { EnrichmentFetcherProvider } from './EnrichmentLinkCardContext'
 import { NestedDocDialogEditor } from './NestedDocDialogEditor'
 

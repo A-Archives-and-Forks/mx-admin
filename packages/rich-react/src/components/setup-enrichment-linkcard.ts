@@ -1,8 +1,4 @@
-import {
-  enhancedEditRendererConfig,
-  enhancedRendererConfig,
-} from '@haklex/rich-kit-shiro'
-
+import { enhancedEditRendererConfig, enhancedRendererConfig } from '../shiro'
 import { EnrichmentLinkCard } from './EnrichmentLinkCard'
 
 // Globally route the LinkCard slot through our enrichment-aware renderer.

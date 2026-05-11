@@ -105,6 +105,6 @@ See `docs/typography.md` for full guidelines.
 ### Rich Editor Integration (React-in-Vue)
 
 admin-vue3 is a Vue 3 project but embeds the React-based haklex editor via a bridge pattern in `src/components/editor/rich/RichEditor.tsx`:
-- Uses `createRoot()` from `react-dom/client` inside Vue `defineComponent` to mount `ShiroEditor`
-- Imports: `@haklex/rich-kit-shiro` (editor + renderers), `@haklex/rich-plugin-toolbar`, `@haklex/rich-editor-ui`, `@haklex/rich-diff`, `@haklex/rich-ext-nested-doc`, `@haklex/rich-style-token`
+- Uses `createRoot()` from `react-dom/client` inside Vue `defineComponent` to mount the local `ShiroEditor` (`packages/rich-react/src/shiro/`)
+- Local Shiro lives in `packages/rich-react/src/shiro/` — composes `@haklex/rich-editor` + per-feature `@haklex/rich-ext-*` / `@haklex/rich-renderer-*` packages directly
 - All `@haklex/*` packages are pinned npm versions (not workspace links). After haklex releases, update versions here.

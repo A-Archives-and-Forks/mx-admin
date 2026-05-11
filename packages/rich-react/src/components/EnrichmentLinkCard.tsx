@@ -3,7 +3,10 @@ import type { LinkCardRendererProps } from '@haklex/rich-editor/renderers'
 import type { CSSProperties, FC, ReactNode } from 'react'
 import type { EnrichmentAttribute, EnrichmentResult } from '../types'
 
-import { LinkCardRenderer, LinkCardSkeleton } from '@haklex/rich-kit-shiro'
+import {
+  LinkCardRenderer,
+  LinkCardSkeleton,
+} from '@haklex/rich-renderer-linkcard'
 
 import { useEnrichmentFetcher } from './EnrichmentLinkCardContext'
 

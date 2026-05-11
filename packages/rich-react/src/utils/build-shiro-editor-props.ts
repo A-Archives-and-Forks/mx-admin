@@ -1,6 +1,6 @@
 import type { RichEditorVariant } from '@haklex/rich-editor'
-import type { ShiroEditorProps } from '@haklex/rich-kit-shiro'
 import type { Klass, LexicalNode, SerializedEditorState } from 'lexical'
+import type { ShiroEditorProps } from '../shiro'
 import type { ImageUpload } from '../types'
 
 export type BuildShiroEditorPropsInput = {

@@ -10,7 +10,7 @@ import type { LexicalEditor, SerializedEditorState } from 'lexical'
 import { $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown'
 
 import '@haklex/rich-ext-ai-agent/style.css'
-import '@haklex/rich-kit-shiro/style.css'
+import '../shiro/style'
 import '@haklex/rich-plugin-toolbar/style.css'
 import '@haklex/rich-ext-nested-doc/style.css'
 

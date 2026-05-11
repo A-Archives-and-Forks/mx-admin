@@ -1,5 +1,5 @@
 import type { useAgentLoop } from '@haklex/rich-ext-ai-agent'
-import type { ShiroEditorProps } from '@haklex/rich-kit-shiro'
+import type { ShiroEditorProps } from './shiro'
 
 export type SaveExcalidrawSnapshot = (
   snapshot: object,

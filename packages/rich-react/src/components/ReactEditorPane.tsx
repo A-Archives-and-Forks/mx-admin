@@ -4,9 +4,9 @@ import type {
   ChatMessage,
   LLMProvider,
 } from '@haklex/rich-agent-core'
-import type { ShiroEditorProps } from '@haklex/rich-kit-shiro'
 import type { LexicalEditor } from 'lexical'
 import type { RefObject } from 'react'
+import type { ShiroEditorProps } from '../shiro'
 import type { AgentLoopHandle, SaveExcalidrawSnapshot } from '../types'
 import type { EnrichmentFetcher } from './EnrichmentLinkCardContext'
 
@@ -16,14 +16,15 @@ import {
   AgentSelectionPinPlugin,
   DiffReviewOverlayPlugin,
 } from '@haklex/rich-ext-ai-agent'
+import { ExcalidrawConfigProvider } from '@haklex/rich-ext-excalidraw'
 import {
   NestedDocDialogEditorProvider,
   nestedDocEditNodes,
   NestedDocPlugin,
 } from '@haklex/rich-ext-nested-doc'
-import { ExcalidrawConfigProvider, ShiroEditor } from '@haklex/rich-kit-shiro'
 import { ToolbarPlugin } from '@haklex/rich-plugin-toolbar'
 
+import { ShiroEditor } from '../shiro'
 import { EnrichmentFetcherProvider } from './EnrichmentLinkCardContext'
 
 import './setup-enrichment-linkcard'

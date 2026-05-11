@@ -23,12 +23,19 @@ vi.mock('@haklex/rich-ext-nested-doc', async () => {
   }
 })
 
-vi.mock('@haklex/rich-kit-shiro', async () => {
+vi.mock('@haklex/rich-ext-excalidraw', async () => {
   const { createElement } = await import('react')
 
   return {
     ExcalidrawConfigProvider: (props: any) =>
       createElement('excalidraw-config-provider', props, props.children),
+  }
+})
+
+vi.mock('../shiro', async () => {
+  const { createElement } = await import('react')
+
+  return {
     ShiroEditor: (props: any) =>
       createElement('shiro-editor', props, props.children),
   }
