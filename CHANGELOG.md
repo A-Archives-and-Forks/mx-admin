@@ -1,9 +1,14 @@
 # CHANGELOG
 
 
+## <small>7.1.6 (2026-05-11)</small>
+
+* release: v7.1.6 ([368111f](https://github.com/mx-space/mx-admin/commit/368111f))
+* refactor(rich-react): route LinkCard through haklex plugin pipeline ([fabc70e](https://github.com/mx-space/mx-admin/commit/fabc70e))
+
 ## <small>7.1.5 (2026-05-11)</small>
 
-* release: v7.1.5 ([4c12e17](https://github.com/mx-space/mx-admin/commit/4c12e17))
+* release: v7.1.5 ([b0c8ce4](https://github.com/mx-space/mx-admin/commit/b0c8ce4))
 * style(admin): rich editor content mt-4 and conditional toolbar chrome ([f2a2a67](https://github.com/mx-space/mx-admin/commit/f2a2a67))
 * chore(deps): bump @haklex/* to 0.8.0 ([6a1b03f](https://github.com/mx-space/mx-admin/commit/6a1b03f))
 * chore(rich-react): migrate to @haklex 0.7.0 with vendored Shiro ([47c6666](https://github.com/mx-space/mx-admin/commit/47c6666))
