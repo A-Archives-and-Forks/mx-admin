@@ -113,7 +113,7 @@
 
 .write-editor-wrapper.rich-editor-mode .write-editor-content {
   max-width: var(--wysiwyg-content-width);
-  margin: 0 auto;
+  margin: 1rem auto 0;
   width: 100%;
   padding-top: 0;
   flex: 0 0 auto;
@@ -162,12 +162,20 @@
   height: 100%;
 }
 
-/* Rich editor toolbar: hide shadow when not sticky */
+/* Rich editor toolbar: strip border/bg/shadow until sticky-stuck */
 .write-editor-wrapper.rich-editor-mode [role='toolbar'] {
+  border-color: transparent;
+  background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow: none;
 }
 
 .write-editor-wrapper.rich-editor-mode.toolbar-stuck [role='toolbar'] {
+  border-color: var(--rc-border);
+  background-color: color-mix(in srgb, var(--rc-bg) 90%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: var(--rc-shadow-top-bar);
 }
 
