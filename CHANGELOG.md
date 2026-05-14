@@ -1,9 +1,23 @@
 # CHANGELOG
 
 
+## 7.2.0 (2026-05-14)
+
+* release: v7.2.0 ([e9d34ec](https://github.com/mx-space/mx-admin/commit/e9d34ec))
+* chore(deps): bump @haklex/* from 0.8.0 to 0.9.1 ([1155ee2](https://github.com/mx-space/mx-admin/commit/1155ee2))
+* chore(deps): bump @haklex/* to 0.10.0 ([d010c18](https://github.com/mx-space/mx-admin/commit/d010c18))
+* chore(deps): bump @haklex/* to 0.9.2 ([5a39cb7](https://github.com/mx-space/mx-admin/commit/5a39cb7))
+* feat(admin): enrichment management page + search-index master-detail refactor ([5216a7d](https://github.com/mx-space/mx-admin/commit/5216a7d))
+
+## <small>7.1.7 (2026-05-12)</small>
+
+* chore: release v7.1.7 ([d102e05](https://github.com/mx-space/mx-admin/commit/d102e05))
+* fix(deps): dedupe @codemirror/state by bumping CodeMirror and @haklex/* to latest ([00a4fa2](https://github.com/mx-space/mx-admin/commit/00a4fa2))
+* docs: add keymap architecture and posts-list redesign specs ([eda0d7d](https://github.com/mx-space/mx-admin/commit/eda0d7d))
+
 ## <small>7.1.6 (2026-05-11)</small>
 
-* release: v7.1.6 ([368111f](https://github.com/mx-space/mx-admin/commit/368111f))
+* release: v7.1.6 ([7d4bbe5](https://github.com/mx-space/mx-admin/commit/7d4bbe5))
 * refactor(rich-react): route LinkCard through haklex plugin pipeline ([fabc70e](https://github.com/mx-space/mx-admin/commit/fabc70e))
 
 ## <small>7.1.5 (2026-05-11)</small>
