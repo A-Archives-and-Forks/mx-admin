@@ -1,9 +1,17 @@
 # CHANGELOG
 
 
+## 7.3.0 (2026-05-15)
+
+* release: v7.3.0 ([963b6a9](https://github.com/mx-space/mx-admin/commit/963b6a9))
+* feat(shorthand): multi-enrichment preview for recently entries (#1044) ([d03256b](https://github.com/mx-space/mx-admin/commit/d03256b)), closes [#1044](https://github.com/mx-space/mx-admin/issues/1044)
+* chore(deps): bump @haklex/* to 0.11.0 ([8d98a22](https://github.com/mx-space/mx-admin/commit/8d98a22))
+* chore(deps): bump @haklex/* to 0.12.0 ([be37002](https://github.com/mx-space/mx-admin/commit/be37002))
+* chore(deps): bump @haklex/* to 0.13.0 ([8ff334a](https://github.com/mx-space/mx-admin/commit/8ff334a))
+
 ## 7.2.0 (2026-05-14)
 
-* release: v7.2.0 ([e9d34ec](https://github.com/mx-space/mx-admin/commit/e9d34ec))
+* release: v7.2.0 ([54989a5](https://github.com/mx-space/mx-admin/commit/54989a5))
 * chore(deps): bump @haklex/* from 0.8.0 to 0.9.1 ([1155ee2](https://github.com/mx-space/mx-admin/commit/1155ee2))
 * chore(deps): bump @haklex/* to 0.10.0 ([d010c18](https://github.com/mx-space/mx-admin/commit/d010c18))
 * chore(deps): bump @haklex/* to 0.9.2 ([5a39cb7](https://github.com/mx-space/mx-admin/commit/5a39cb7))
